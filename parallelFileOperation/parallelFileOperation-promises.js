@@ -17,7 +17,7 @@ const Executor1 = (resolve, reject) => {
 let q = new Promise(Executor1);
 
 const Executor2 = (a) => {
-  return new Promise((resolve, reject) => {
+  const exec = (resolve, reject) => {
     let error = 1;
     const writeCallback = (err) => {
       if (err) {
@@ -27,7 +27,8 @@ const Executor2 = (a) => {
       resolve(a);
     };
     fs.writeFile("b.txt", "Hi Frens", "utf-8", writeCallback);
-  });
+  };
+  return new Promise(exec);
 };
 
 q.then(Executor2).then(console.log);
